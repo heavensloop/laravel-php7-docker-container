@@ -1,11 +1,14 @@
 FROM ubuntu:latest
 MAINTAINER Popsana Barida <popsyjunior@gmail.com>
 
-#Install Apache2
-RUN apt-get update \
-  && apt-get -y install apache2 \
-  && apt-get install -y nano
-
+#Install PHP, Apache2 and dependencies
+RUN apt-get -y install libapache2-mod-php7.0 php7.0 php7.0-cli php-xdebug php7.0-mbstring sqlite3 php7.0-mysql php-imagick php-memcached php-pear curl imagemagick php7.0-dev php7.0-phpdbg php7.0-gd npm nodejs-legacy php7.0-json php7.0-curl php7.0-sqlite3 php7.0-intl php7.0-zip apache2 nano vim git-core wget libsasl2-dev libssl-dev libsslcommon2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev libpcre3-dev \
+  && a2enmod headers \
+  && a2enmod rewrite
+  
+#Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer --version
 
 #Set Environment
 ENV APACHE_RUN_USER www-data
@@ -42,15 +45,6 @@ WORKDIR /var/www/html
 
 #RUN cron status
 
-
-#Install PHP
-RUN apt-get -y install libapache2-mod-php7.0 php7.0 php7.0-cli php-xdebug php7.0-mbstring sqlite3 php7.0-mysql php-imagick php-memcached php-pear curl imagemagick php7.0-dev php7.0-phpdbg php7.0-gd npm nodejs-legacy php7.0-json php7.0-curl php7.0-sqlite3 php7.0-intl apache2 vim git-core wget libsasl2-dev libssl-dev libsslcommon2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev libpcre3-dev \
-  && a2enmod headers \
-  && a2enmod rewrite
-
-#Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
 
 
 #Final Checks
