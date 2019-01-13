@@ -8,7 +8,7 @@ RUN apt-get update -y
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ondrej/php
 RUN add-apt-repository ppa:ondrej/apache2
-RUN apt-get -y install libapache2-mod-php7.2 php7.2 php7.2-cli php-xdebug php7.2-mbstring sqlite3 php7.2-mysql php-imagick php-memcached php-pear curl imagemagick php7.2-dev php7.2-phpdbg php7.2-gd node-gyp npm nodejs php7.2-json php7.2-curl php7.2-sqlite3 php7.2-intl php7.2-zip apache2 nano git-core wget libsasl2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev pkg-config libpcre3-dev \
+RUN apt-get -y install libapache2-mod-php7.2 php7.2 php7.2-cli php-xdebug php7.2-mbstring sqlite3 php7.2-mysql php-imagick php-memcached php-pear curl imagemagick php7.2-dev php7.2-phpdbg php7.2-gd nodejs-dev node-gyp npm nodejs php7.2-json php7.2-curl php7.2-sqlite3 php7.2-intl php7.2-zip apache2 nano git-core wget libsasl2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev pkg-config libpcre3-dev \
   && a2enmod headers \
   && a2enmod rewrite
   
