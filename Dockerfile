@@ -4,16 +4,24 @@ MAINTAINER Popsana Barida <popsyjunior@gmail.com>
 #Update apt-get repos
 RUN apt-get update -y
 
+#Disable user interaction
+ENV DEBIAN_FRONTEND=noninteractive
+
+# RUN apt-get install -y software-properties-common
+# RUN add-apt-repository ppa:ondrej/php
+# RUN add-apt-repository ppa:ondrej/apache2
+
 #Install PHP, Apache2 and dependencies
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ondrej/php
-RUN add-apt-repository ppa:ondrej/apache2
-RUN apt-get -y install libapache2-mod-php7.2 php7.2 php7.2-cli php-xdebug php7.2-mbstring sqlite3 php7.2-mysql php-imagick php-memcached php-pear curl imagemagick php7.2-dev php7.2-phpdbg php7.2-gd nodejs-dev node-gyp npm nodejs php7.2-json php7.2-curl php7.2-sqlite3 php7.2-intl php7.2-zip apache2 nano git-core wget libsasl2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev pkg-config libpcre3-dev \
+RUN apt-get install -y \
+    nodejs=8.10.0~dfsg-2ubuntu0.2 nodejs-dev=8.10.0~dfsg-2ubuntu0.2 \
+    npm \
+    libssl-dev
+RUN apt-get -y install libapache2-mod-php7.2 php7.2 php7.2-cli php-xdebug php7.2-mbstring sqlite3 php7.2-mysql php-imagick php-memcached php-pear curl imagemagick php7.2-dev php7.2-phpdbg php7.2-gd php7.2-json php7.2-curl php7.2-sqlite3 php7.2-intl php7.2-zip apache2 nano git-core wget libsasl2-dev libcurl4-openssl-dev autoconf g++ make openssl libssl-dev pkg-config libpcre3-dev \
   && a2enmod headers \
   && a2enmod rewrite
   
 #Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer  | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer --version
 
 #Set Environment
